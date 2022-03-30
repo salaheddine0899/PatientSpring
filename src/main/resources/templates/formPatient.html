@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	layout:decorate="template1">
+<head>
+<meta charset="utf-8">
+<title>form patients</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+		<div class="container mt-5">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header" th:if="${patient.id==null}">Ajouter un patient</div>
+					<div class="card-header" th:if="${patient.id!=null}">Modifier un patient</div>
+					<div class="card-body">
+						<form th:action="@{savePatient}" method="post">
+							<div class="form-group">
+								 <input type="hidden"
+								 name="id" th:value="${patient.id}" />
+							</div>
+							<div class="form-group">
+								<label class="control-label">Nom</label> <input type="text"
+									class="form-control" name="nom" th:value="${patient.nom}" /> <span
+									th:errors="${patient.nom}"></span>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Date naissance</label> <input
+									type="date" class="form-control" name="dateNaissance"
+									th:value="${patient.dateNaissance}" />
+							</div>
+							<div class="form-group">
+								<label class="control-label">Malade</label> <input
+									type="checkbox" name="malade" th:checked="${patient.malade}" />
+							</div>
+							<button class="btn btn-primary" type="submit">save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
